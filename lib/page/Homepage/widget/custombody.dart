@@ -2,19 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:web_404/page/Homepage/Api/api.dart';
 import 'package:web_404/page/Homepage/model/model.dart';
 
+import '../homepageview.dart';
 import 'customspinkit.dart';
 
-class CustomBody extends StatefulWidget {
-  final String newc;
-  CustomBody({Key key, this.newc}) : super(key: key);
+class CustomBody extends StatelessWidget {
+  const CustomBody({
+    Key key,
+  }) : super(key: key);
 
   @override
-  _CustomBodyState createState() => _CustomBodyState();
-}
-
-String newc = "Random";
-
-class _CustomBodyState extends State<CustomBody> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
