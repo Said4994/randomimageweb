@@ -9,7 +9,7 @@ final apikey3 = 'JnUAcB_5dwbuYD4HHsrHOqy_xbxhm8Z7NNaXfze3KeM';
 Future<List<Resim>> getapi(String value) async {
   try {
     Response response = await Dio().get(
-        "https://api.unsplash.com/photos/random/?client_id=$apikey1&count=20&query=$value");
+        "https://api.unsplash.com/photos/random/?client_id=$apikey3&count=20&query=$value");
 
     return (response.data as List).map((x) => Resim.fromJson(x)).toList();
   } catch (e) {

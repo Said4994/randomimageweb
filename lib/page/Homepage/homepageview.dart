@@ -35,7 +35,11 @@ class HomePageViewState extends State<HomePageView> {
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
     return Stack(
-      children: [CustomBody(), CustomText(), customBar(width, height)],
+      children: [
+        CustomBody(),
+        CustomText(),
+        customBar(width, height),
+      ],
     );
   }
 
@@ -64,21 +68,9 @@ class HomePageViewState extends State<HomePageView> {
                     SizedBox(
                       width: width >= 700 ? 120 : 40,
                     ),
-                    AnimatedTextKit(
-                        isRepeatingAnimation: true,
-                        repeatForever: true,
-                        onTap: () {
-                          setState(() {});
-                          selectedindex = index;
-                          newc = catagory[index];
-                        },
-                        animatedTexts: [
-                          ColorizeAnimatedText(catagory[index],
-                              textStyle: GoogleFonts.montserrat(
-                                  decoration: TextDecoration.none,
-                                  fontSize: fontssize - 22),
-                              colors: colorize)
-                        ]),
+                    width >= 800
+                        ? animatedTextKitChangeColor(index)
+                        : materialNoChangeColor(index)
                   ],
                 );
               },
@@ -86,6 +78,43 @@ class HomePageViewState extends State<HomePageView> {
             height: height / 20,
             width: width / 1.5,
           ),
+        ),
+      ),
+    );
+  }
+
+  AnimatedTextKit animatedTextKitChangeColor(int index) {
+    return AnimatedTextKit(
+        isRepeatingAnimation: true,
+        repeatForever: true,
+        onTap: () {
+          setState(() {
+            selectedindex = index;
+            newc = catagory[index];
+          });
+        },
+        animatedTexts: [
+          ColorizeAnimatedText(catagory[index],
+              textStyle: GoogleFonts.montserrat(
+                  decoration: TextDecoration.none, fontSize: fontssize - 22),
+              colors: colorize)
+        ]);
+  }
+
+  Material materialNoChangeColor(int index) {
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: () {
+          setState(() {
+            selectedindex = index;
+            newc = catagory[index];
+          });
+        },
+        child: Text(
+          catagory[index],
+          style: GoogleFonts.montserrat(
+              decoration: TextDecoration.none, fontSize: fontssize - 22),
         ),
       ),
     );
