@@ -1,5 +1,6 @@
 import 'dart:html';
 
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,7 +16,8 @@ String newc = "Random";
 double fontssize = 36;
 int selectedindex;
 
-List<String> catagory = [
+final List<Color> colorize = [Colors.black, Colors.white, Colors.black];
+final List<String> catagory = [
   "Color",
   "Nature",
   "People",
@@ -62,29 +64,21 @@ class HomePageViewState extends State<HomePageView> {
                     SizedBox(
                       width: width >= 700 ? 120 : 40,
                     ),
-                    Material(
-                      color: Colors.transparent,
-                      child: InkWell(
-                        highlightColor: Colors.transparent,
+                    AnimatedTextKit(
+                        isRepeatingAnimation: true,
+                        repeatForever: true,
                         onTap: () {
-                          setState(() {
-                            setState(() {});
-
-                            selectedindex = index;
-                            newc = catagory[index];
-                          });
+                          setState(() {});
+                          selectedindex = index;
+                          newc = catagory[index];
                         },
-                        child: Text(
-                          catagory[index],
-                          style: GoogleFonts.montserrat(
-                              decoration: TextDecoration.none,
-                              fontSize: selectedindex == index
-                                  ? fontssize
-                                  : fontssize - 22,
-                              color: Colors.black.withOpacity(0.9)),
-                        ),
-                      ),
-                    ),
+                        animatedTexts: [
+                          ColorizeAnimatedText(catagory[index],
+                              textStyle: GoogleFonts.montserrat(
+                                  decoration: TextDecoration.none,
+                                  fontSize: fontssize - 22),
+                              colors: colorize)
+                        ]),
                   ],
                 );
               },
